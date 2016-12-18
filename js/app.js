@@ -7,6 +7,9 @@ $(document).ready ( function(){
 
 //If user selects "other" on job role, the "other" text field is shown for their input
 $("#title").on("change", function(){
+    //reset hide
+    $("#other-title").hide();
+    
     if ($("#title").val() === "other") {
         console.log("selected other");
     $("#other-title").show();
