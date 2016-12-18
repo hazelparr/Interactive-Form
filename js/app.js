@@ -115,10 +115,10 @@ $("#mail").on("keyup", function() {
 
 //// Validation Upon Submission//////
 $("button[type='submit']").on("click", function(e){
-    
-    var cardVal = /\b\d{4}(| |-)\d{4}\1\d{4}\1\d{4}\b/g; //credit card validation
-    var zipVal = /^\d{5}(?:[-\s]\d{4})?$/; //zip code validation
-    var cvv = /^[0-9]{3}$/; // cvv validation
+    var error = 0;
+    var cardVal = /^[0-9]{13,16}$/; //between 13-16 digits
+    var zipVal = /^\d{5}(?:[-\s]\d{4})?$/; //zip code validation 
+    var cvv = /^[0-9]{3}$/; // cvv validation 3 digits
 
     //clear error messages
     $("p.error-text").remove();
@@ -127,6 +127,7 @@ $("button[type='submit']").on("click", function(e){
         $("#mail").after("<p class='error-text'>Invalid email address format</p>");
         e.preventDefault();
         console.log("form not submitted");
+        error += 1
     } else if ($("#mail").val() === "") {
         $("#mail").after("<p class='error-text'>Please enter your email</p>");
         e.preventDefault();
@@ -136,36 +137,43 @@ $("button[type='submit']").on("click", function(e){
         $("#name").after("<p class='error-text'>Please enter your name</p>");
         e.preventDefault();
         console.log("form not submitted");
+        error += 1
     }
 
     if ($("#title").val() === "other" && $("#other-title").val() === "") {
         $("#other-title").after("<p class='error-text'>Please enter your job role</p>");
         e.preventDefault();
+        error += 1
     }
 
     if ($("input:checked").length === 0) {
         $(".activities").after("<p class='error-text'>Please select an activity</p>");
         e.preventDefault();
+        error += 1
     }
 
     if ($("#payment").val() === "credit card" && !cardVal.test($("#cc-num").val())) {
-        $("[for='exp-month']").before("<p class='error-text'>Please enter a valid 16-digit credit card number</p>");
+        $("[for='exp-month']").before("<p class='error-text'>Please enter a valid credit card number with 13-16 digits</p>");
         e.preventDefault();
+        error += 1
     }
 
     if ($("#payment").val() === "credit card" && !zipVal.test($("#zip").val())) {
         $("[for='exp-month']").before("<p class='error-text'>Please enter a valid 5-digit zip code</p>");
         e.preventDefault();
+        error += 1
     } 
     if ($("#payment").val() === "credit card" && !cvv.test($("#cvv").val())) {
         $("[for='exp-month']").before("<p class='error-text'>Please enter a valid 3-digit CVV number</p>");
         e.preventDefault();
-    } else {
-        
+        error += 1
+    } 
+    
+    if (error === 0) {
         $("p.error-text").remove();
         alert("Thank you for registering. See you at the conference!");
-        }
-    
+    }
+
 });
 
 
