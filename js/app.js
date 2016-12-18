@@ -1,8 +1,10 @@
-//On load, cursor is on the name field and hides "Other Role" text field
+//On load, cursor is on the name field and hides "Other Role" text field, hides the color text field and
+// the paypal and bitcoin information
 $(document).ready ( function(){
     $("#name").focus();
     $("#other-title").hide();
     $("#colors-js-puns").hide();
+    $("#paypal, #bitcoin").hide();
 });
 
 //If user selects "other" on job role, the "other" text field is shown for their input
