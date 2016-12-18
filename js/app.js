@@ -127,32 +127,45 @@ $("button[type='submit']").on("click", function(e){
         $("#mail").after("<p class='error-text'>Invalid email address format</p>");
         e.preventDefault();
         console.log("form not submitted");
-    } else if ($("#name").val() === "") {
-        $("#name").after("<p class='error-text'>Please enter your name</p>");
-        e.preventDefault();
-        console.log("form not submitted");
     } else if ($("#mail").val() === "") {
         $("#mail").after("<p class='error-text'>Please enter your email</p>");
         e.preventDefault();
-    } else if ($("#title").val() === "other" && $("#other-title").val() === "") {
+    }
+
+    if ($("#name").val() === "") {
+        $("#name").after("<p class='error-text'>Please enter your name</p>");
+        e.preventDefault();
+        console.log("form not submitted");
+    }
+
+    if ($("#title").val() === "other" && $("#other-title").val() === "") {
         $("#other-title").after("<p class='error-text'>Please enter your job role</p>");
         e.preventDefault();
-    } else if ($("input:checked").length === 0) {
+    }
+
+    if ($("input:checked").length === 0) {
         $(".activities").after("<p class='error-text'>Please select an activity</p>");
         e.preventDefault();
-    } else if ($("#payment").val() === "credit card" && !cardVal.test($("#cc-num").val())) {
+    }
+
+    if ($("#payment").val() === "credit card" && !cardVal.test($("#cc-num").val())) {
         $("[for='exp-month']").before("<p class='error-text'>Please enter a valid 16-digit credit card number</p>");
         e.preventDefault();
-    } else if ($("#payment").val() === "credit card" && !zipVal.test($("#zip").val())) {
+    }
+
+    if ($("#payment").val() === "credit card" && !zipVal.test($("#zip").val())) {
         $("[for='exp-month']").before("<p class='error-text'>Please enter a valid 5-digit zip code</p>");
         e.preventDefault();
-    } else if ($("#payment").val() === "credit card" && !cvv.test($("#cvv").val())) {
+    } 
+    if ($("#payment").val() === "credit card" && !cvv.test($("#cvv").val())) {
         $("[for='exp-month']").before("<p class='error-text'>Please enter a valid 3-digit CVV number</p>");
         e.preventDefault();
     } else {
+        
         $("p.error-text").remove();
         alert("Thank you for registering. See you at the conference!");
-    }
+        }
+    
 });
 
 
